@@ -27,7 +27,10 @@ getSearch = e => {
       e.preventDefault();
       this.setState({finalSearch:this.state.searchField});
     };
-
+sortcoursebylength=e=>{
+        e.preventDefault();
+  console.log('sort');
+}
 
   render(){
     const {courses,searchField,finalSearch}=this.state;
@@ -49,6 +52,7 @@ getSearch = e => {
           <form onSubmit={this.getSearch} className="search-form">
             <SearchBox updateSearch={this.updateSearch} placeholder="Search Courses"/>
           </form>
+          <input type="button" sortcoursebylength={this.sortcoursebylength} value="Sort" />
           </div>
           {(filteredCourses.length)?(<h6 className="total-course">Course Found: {filteredCourses.length}</h6>):<Spinner />}
         </header>
