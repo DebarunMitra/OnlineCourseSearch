@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import { SearchBox } from './components/search-box/search-box.component';
-import { Course } from './components/Course/Course.component';
+import { Courses } from './components/course/course.component';
 
 class App extends Component {
   constructor(props){
@@ -31,12 +31,15 @@ getSearch = e => {
   render(){
     const {courses,searchField,finalSearch}=this.state;
     // console.log(finalSearch);
-    const filteredCourses=courses.filter((course) =>{
-    //console.log(course['Child Subject']);
-    return course['Child Subject'].toLowerCase().includes(finalSearch.toLowerCase());
-    });
-    //console.log(filteredCourses);
-
+    const filteredCourses=courses.filter((course) =>
+        course['Child Subject'].toLowerCase().includes(finalSearch.toLowerCase())
+         && course.Length!=='' &&
+         course.Length!==0 &&
+         course['Child Subject']!=='' &&
+         course['Next Session Date']!=='' &&
+         course.Provider!==''
+    );
+  //  filteredCourses.sort((a,b)=>a.Length-b.Length)
     return (
       <div className="App">
         <header className="header">
@@ -46,8 +49,23 @@ getSearch = e => {
             <SearchBox updateSearch={this.updateSearch} placeholder="Search Courses"/>
           </form>
           </div>
+          <h6 className="total-course">Course Found: {filteredCourses.length}</h6>
         </header>
             <div className="courses">
+          {filteredCourses.map((course,index)=>(
+            <Courses
+                key={index}
+                courseId={course['Course Id']}
+                courseName={course['Course Name']}
+                provider={course.Provider}
+                uniOrIns={course['Universities/Institutions']}
+                nextSession={course['Next Session Date']}
+                childSubject={course['Child Subject']}
+                length={course.Length}
+                video={course['Video(Url)']}
+                url={course.Url}
+             />
+          ))}
           </div>
         </div>
         );
