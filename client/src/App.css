@@ -25,7 +25,11 @@ body {
   font-weight: 200;
   font-size: 3rem;
 }
-
+.total-course{
+  color: #4B0082;
+  font-weight: 50;
+  font-size: 2rem;
+}
 .search-form {
   min-height: 5vh;
   display: flex;
