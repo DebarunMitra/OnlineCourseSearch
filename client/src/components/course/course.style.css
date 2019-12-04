@@ -1,4 +1,4 @@
-.recipe {
+.course {
   border-radius: 60px;
   padding: 20px 0;
   margin: 20px;
@@ -8,51 +8,53 @@
   border: 1px solid #80808024;
 }
 
-.recipe:hover,
-.recipe:active {
+.course:hover,
+.course:active {
   transform: scale(1.02);
   transition: transform 200ms ease-in-out;
 }
 
-.recipe_title {
+.course_title {
   text-align: center;
   font-size: 1.6rem;
   color: #565656;
 }
 
-.recipe h2 {
+.course h4 {
   margin: 0;
-  padding: 10px 20px 0px 20px;
+  padding: 10px 20px 0px 50px;
   color: #565656;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
-
-.image_div {
-  width: 100%;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  margin: -33% 0;
-}
-
 .calories {
   text-align: center;
 }
-
-.ingredients {
-  list-style-type: none;
-  padding: 10px 20px;
+.button {
+    display: block;
+    width: 12rem;
+    height: 2.5rem;
+    background: #4B0082;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none !important;
+    border-radius: 2rem;
+    margin-left: 7rem;
+    color: white;
+    font-weight: bold;
 }
 
-.ingredient {
+.course-details {
+  list-style-type: none;
+  padding: 10px 20px 0px 50px;
+}
+.schedule {
   padding: 5px 0;
   line-height: 1.4rem;
 }
-
-.ingredient i {
+.schedule i {
   color: #4B0082;
+}
+.apply-link{
+    text-decoration: none;
+    color: #4B0082;
 }
