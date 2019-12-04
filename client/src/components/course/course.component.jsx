@@ -1,20 +1,26 @@
 import React from 'react' ;
 import './course.style.css';
 
-export const Recipe = ({ title, calories, image, ingredients }) => (
-  <div className="recipe">
-    <h1 className="recipe_title">{title}</h1>
-    <div className="image_div">
-      <img className="image" src={image} alt="" />
-    </div>
-    <p className="calories">Calories: {parseInt(calories)} Kcal</p>
-    <h2>Ingredients:</h2>
-    <ul className="ingredients">
-      {ingredients.map((ingredient, index) => (
-        <li className="ingredient" key={index}>
-          <i className="fas fa-caret-right" /> {ingredient.text}
-        </li>
-      ))}
+export const Courses = ({ courseId,
+                        courseName,
+                        provider,
+                        uniOrIns,
+                        nextSession,
+                        childSubject,
+                        length,
+                        video,
+                        url
+                       }) => (
+  <div className="course">
+    <h1 className="course_title">{courseName}</h1>
+    <h4>Institutions: {uniOrIns}</h4>
+    <h4>Provider: {provider}</h4>
+    <ul className="course-details">
+      <li className="schedule"><i className="fas fa-caret-right" />Subject: {childSubject}</li>
+      <li className="schedule"><i className="fas fa-caret-right" />Next Session: {nextSession}</li>
+      <li className="schedule"><i className="fas fa-caret-right" />Length: {length}</li>
+      <li className="schedule"><i className="fas fa-caret-right" />Link: <a className="apply-link" href={url}>apply</a></li>
     </ul>
+    <a className="button" href={video}>Check Video</a>
   </div>
 );
