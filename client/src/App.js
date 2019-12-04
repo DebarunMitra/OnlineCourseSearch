@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import { SearchBox } from './components/search-box/search-box.component';
 import { Courses } from './components/course/course.component';
+import Spinner from './components/Spinner';
 
 class App extends Component {
   constructor(props){
@@ -49,7 +50,7 @@ getSearch = e => {
             <SearchBox updateSearch={this.updateSearch} placeholder="Search Courses"/>
           </form>
           </div>
-          <h6 className="total-course">Course Found: {filteredCourses.length}</h6>
+          {(filteredCourses.length)?(<h6 className="total-course">Course Found: {filteredCourses.length}</h6>):<Spinner />}
         </header>
             <div className="courses">
           {filteredCourses.map((course,index)=>(
