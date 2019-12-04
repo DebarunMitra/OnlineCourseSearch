@@ -1,3 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  border: 15px solid #4B0082;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 .App {
+  min-height: 100vh;
+  background: white;
+}
+
+.header {
   text-align: center;
+  padding: 20px 40px 60px 40px;
+}
+
+.title {
+  color: #4B0082;
+  font-weight: 200;
+  font-size: 3rem;
+}
+
+.search-form {
+  min-height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.courses{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.search-filter {
+  max-width: 500px;
+  margin: 0 auto;
 }
