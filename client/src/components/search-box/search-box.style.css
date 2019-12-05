@@ -22,6 +22,7 @@
   position: relative;
   right: 43px;
   top: -1px;
+  cursor: pointer;
 }
 
 .search-bar:focus,
