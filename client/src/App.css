@@ -1,18 +1,24 @@
+:root{
+  --themeColor:#4B0082;
+  --backgroundColor:#ffffff;
+  --fontFamily: "Roboto", sans-serif;
+  --btnColor:#663399;
+}
 * {
   box-sizing: border-box;
 }
 
 html {
-  border: 15px solid #4B0082;
+  border: 15px solid var(--themeColor);
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family:var(--fontFamily);
 }
 
 .App {
   min-height: 100vh;
-  background: white;
+  background: var(--backgroundColor);
 }
 
 .header {
@@ -20,19 +26,19 @@ body {
   padding: 20px 40px 60px 40px;
 }
 .header label{
-  color: #4B0082;
+  color: var(--themeColor);
   padding-left: 50px;
   margin-top: 13px;
   font-weight: 50;
   font-size: 1.5rem;
 }
 .title {
-  color: #4B0082;
+  color: var(--themeColor);
   font-weight: 200;
   font-size: 3rem;
 }
 .total-course{
-  color: #4B0082;
+  color: var(--themeColor);
   font-weight: 50;
   font-size: 2rem;
 }
@@ -54,17 +60,17 @@ body {
   margin: 0 auto;
 }
 .btn-sort{
-  background-color:#663399;
+  background-color:var(--btnColor);
   border-radius: 20px;
   border: none;
-  color: white;
+  color:var(--backgroundColor);
   margin-top: 13px;
   margin-left: -20px;
   outline: none !important;
+  cursor: pointer;
 }
 .filter-sort-course{
   display: flex;
-  flex-flow: row;
-  position: absolute;
-  left: 20%;
+  flex-flow:wrap;
+  margin-left: 13%;
 }
