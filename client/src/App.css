@@ -19,7 +19,12 @@ body {
   text-align: center;
   padding: 20px 40px 60px 40px;
 }
-
+.header label{
+  color: #4B0082;
+  margin-top: 13px;
+  font-weight: 50;
+  font-size: 1.5rem;
+}
 .title {
   color: #4B0082;
   font-weight: 200;
@@ -43,8 +48,22 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-
 .search-filter {
   max-width: 500px;
   margin: 0 auto;
+}
+.btn-sort{
+  background-color:#663399;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  margin-top: 13px;
+  margin-left: -20px;
+  outline: none !important;
+}
+.filter-sort-course{
+  display: flex;
+  flex-flow: row;
+  position: absolute;
+  left: 30%;
 }
