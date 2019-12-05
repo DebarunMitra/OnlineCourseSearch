@@ -78,7 +78,6 @@ getProvider = e => {
   render(){
     const {courses,finalSearch,provider,session}=this.state;
     let regexProvider='',regexSession='';
-  //  console.log(courses);
     (provider==='')?regexProvider = new RegExp(/.*\S.*/, "gi"):regexProvider = new RegExp("\\b(?:"+provider+")\\b", "gi");
     (session==='')?regexSession = new RegExp(/.*\S.*/, "gi"):regexSession = new RegExp("\\b(?:"+session+")\\b", "gi");
     const filteredCourses=courses.filter((course) =>
