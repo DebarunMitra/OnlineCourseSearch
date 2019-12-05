@@ -3,7 +3,7 @@ import './App.css';
 import { SearchBox } from './components/search-box/search-box.component';
 import { Courses } from './components/course/course.component';
 import { ProviderFilterBox } from './components/provider-filter-box/provider-filter-box.component';
-import Spinner from './components/Spinner';
+import Spinner from './components/spinner/spinner.component';
 import AddSessionDate from './service/AddSessionDate';
 
 class App extends Component {
@@ -35,7 +35,7 @@ componentDidMount(){
  */
 updateSearch = e => {
   this.setState({
-    searchField: e.tarset.value
+    searchField: e.target.value
   });
 };
 /**
@@ -104,7 +104,7 @@ sortValueDesc = e => {
  */
 updateProvider = e => {
   this.setState({
-    providerSearch: e.tarset.value
+    providerSearch: e.target.value
   });
 }
 /**

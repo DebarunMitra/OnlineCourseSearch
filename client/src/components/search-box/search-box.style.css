@@ -1,7 +1,13 @@
+:root{
+    --themeColor: #4B0082;
+    --backgroundImageColor: #663399;
+    --boxShadow: #00000040;
+    --placeHolderColor:#00000070;
+  }
 .search-bar {
-  max-width: 320px;
-  min-width: 320px;
-  width: 45%;
+  max-width: 30vw;
+  min-width: 20vw;
+  width: 80%;
   border: none;
   padding: 12px;
   box-shadow: 0 0 5px 0 #00000040;

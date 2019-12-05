@@ -1,6 +1,8 @@
 import React from 'react';
 import './search-box.style.css';
-
+/*
+  Destructuring parameters from props
+ */
 export const SearchBox = ({ search, updateSearch, placeholder }) => (
   <div>
     <input
