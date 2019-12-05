@@ -18,12 +18,21 @@ class App extends Component {
     session:''
   };
 }
+/**
+ * [componentDidMount]
+ * @return [fetch all course related data from the api endpoint]
+ */
 componentDidMount(){
   fetch('https://nut-case.s3.amazonaws.com/coursessc.json').then((response) => response.json()).then((courses) =>{
   this.setState({courses:courses});
   }
 )};
 
+/**
+ * [updateSearch]
+ * @param e [event object from eventhandler]
+ * @return  [update search values into the searchField]
+ */
 updateSearch = e => {
   this.setState({
     searchField: e.tarset.value
@@ -32,7 +41,7 @@ updateSearch = e => {
 /**
  * [setSearch]
  * @param e [event object from eventhandler]
-* @return   [set the final search value to finalSearch ]
+* @return   [set the final search value to finalSearch]
  */
 setSearch = e => {
   e.preventDefault();
@@ -47,8 +56,8 @@ setSearch = e => {
  */
 sortSessionAsceYear=e=>{
   e.preventDefault();
-  let courseData=new SessionFilter(this.state.courses);
-  let sortBySession=courseData.setSessionDate();
+  let courseData=new SessionFilter(this.state.courses);//SessionFilter class to add SessionDate in the courses
+  let sortBySession=courseData.getSessionDate();//get courses with SessionDate
   this.setState({
     courses:sortBySession.sort((current,next)=>current['SessionDate']-next['SessionDate'])
   });
@@ -112,8 +121,16 @@ setProvider = e => {
   render(){
     const {courses,finalSearch,provider,session}=this.state;
     let regexProvider='',regexSession='';
+
+    //  [/.*\S.*/]: regex to get all value except whitespase
+    //  [gi]: 'g' regex to global search and 'i' for case insensitive
+    //  [\b]: matches at a position that is called a “word boundary”
     (provider==='')?regexProvider = new RegExp(/.*\S.*/, "gi"):regexProvider = new RegExp("\\b(?:"+provider+")\\b", "gi");
     (session==='')?regexSession = new RegExp(/.*\S.*/, "gi"):regexSession = new RegExp("\\b(?:"+session+")\\b", "gi");
+    /**
+     * [filteredCourses]
+     * @return [it filter the courses based on user search (finalSearch)]
+     */
     const filteredCourses=courses.filter((course) =>
          course['Child Subject'].toLowerCase().includes(finalSearch.toLowerCase())
          && course.Length!=='' &&
@@ -157,7 +174,7 @@ setProvider = e => {
             </div>
           ):false}
         </header>
-            <div className="courses">
+        <div className="courses">
           {filteredCourses.map((course,index)=>(
             <Courses
                 key={index}
@@ -172,9 +189,9 @@ setProvider = e => {
                 url={course.Url}
              />
           ))}
-          </div>
         </div>
-        );
+      </div>
+    );
   }
 }
 
