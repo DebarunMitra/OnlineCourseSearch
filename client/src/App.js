@@ -4,6 +4,7 @@ import { SearchBox } from './components/search-box/search-box.component';
 import { Courses } from './components/course/course.component';
 import { ProviderFilterBox } from './components/provider-filter-box/provider-filter-box.component';
 import Spinner from './components/Spinner';
+import SessionFilter from './service/SessionFilter';
 
 class App extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class App extends Component {
     finalSearch:'',
     providerSearch:'',
     provider:'',
-    sessionDate:''
+    session:''
   };
 }
 componentDidMount(){
@@ -24,40 +25,69 @@ componentDidMount(){
 )};
 
 updateSearch = e => {
-      this.setState({searchField:e.target.value});
-  };
+  this.setState({
+    searchField: e.target.value
+  });
+};
 
 getSearch = e => {
-      e.preventDefault();
-      this.setState({finalSearch:this.state.searchField});
-    };
-sortValueAsen=e=>{
-      e.preventDefault();
-      //  console.log('sort');
-      this.setState({courses:this.state.courses.sort((a,b)=>a.Length-b.Length)});
-      //console.log(this.state.courses);
-}
-sortValueDesen=e=>{
   e.preventDefault();
-  this.setState({courses:this.state.courses.sort((a,b)=>b.Length-a.Length)});
+  this.setState({
+    finalSearch: this.state.searchField
+  });
+};
+sortSessionAsceYear=e=>{
+  e.preventDefault();
+  let courseData=new SessionFilter(this.state.courses);
+  let sortBySession=courseData.getSessionDate();
+  this.setState({
+    courses:sortBySession.sort((a,b)=>a['SessionDate']-b['SessionDate'])
+  });
 }
-updateProvider=e=>{
-        this.setState({providerSearch:e.target.value});
+sortSessionDescYear=e=>{
+  e.preventDefault();
+  let courseData=new SessionFilter(this.state.courses);
+  let sortBySession=courseData.getSessionDate();
+  this.setState({
+    courses:sortBySession.sort((a,b)=>b['SessionDate']-a['SessionDate'])
+  });
 }
-getProvider=e=>{
-    e.preventDefault();
-    this.setState({provider:this.state.providerSearch});
+sortValueAsce = e => {
+  e.preventDefault();
+  this.setState({
+    courses: this.state.courses.sort((current, next) => current.Length - next.Length)
+  });
+}
+sortValueDesc = e => {
+  e.preventDefault();
+  this.setState({
+    courses: this.state.courses.sort((current, next) => next.Length - current.Length)
+  });
+}
+updateProvider = e => {
+  this.setState({
+    providerSearch: e.target.value
+  });
+}
+getProvider = e => {
+  e.preventDefault();
+  this.setState({
+    provider: this.state.providerSearch
+  });
 }
   render(){
-    const {courses,finalSearch,provider}=this.state;
-    let regexProvider='';
+    const {courses,finalSearch,provider,session}=this.state;
+    let regexProvider='',regexSession='';
+  //  console.log(courses);
     (provider==='')?regexProvider = new RegExp(/.*\S.*/, "gi"):regexProvider = new RegExp("\\b(?:"+provider+")\\b", "gi");
+    (session==='')?regexSession = new RegExp(/.*\S.*/, "gi"):regexSession = new RegExp("\\b(?:"+session+")\\b", "gi");
     const filteredCourses=courses.filter((course) =>
          course['Child Subject'].toLowerCase().includes(finalSearch.toLowerCase())
          && course.Length!=='' &&
          course.Length!==0 &&
          course['Child Subject']!=='' &&
          course['Next Session Date']!=='' &&
+         course['Next Session Date']!=='Self paced' &&
          course.Provider.match(regexProvider) &&
          course['Universities/Institutions'].match(/.*\S.*/)
     );
@@ -74,11 +104,18 @@ getProvider=e=>{
           {(filteredCourses.length)?(<h6 className="total-course">Course Found: {filteredCourses.length}</h6>):<Spinner />}
           {(filteredCourses.length)?(
             <div className="filter-sort-course">
-            <label>Course Length:</label>
-              <form onSubmit={this.sortValueAsen} className="search-form">
+            <label>Session Date:</label>
+              <form onSubmit={this.sortSessionAsceYear} className="search-form">
                 <button className="btn-sort" type="submit"><i className="fas fa-sort-numeric-down"></i></button>
               </form>
-              <form onSubmit={this.sortValueDesen} className="search-form">
+              <form onSubmit={this.sortSessionDescYear} className="search-form">
+                <button className="btn-sort" type="submit"><i className="fas fa-sort-numeric-up"></i></button>
+              </form>
+            <label>Course Length:</label>
+              <form onSubmit={this.sortValueAsce} className="search-form">
+                <button className="btn-sort" type="submit"><i className="fas fa-sort-numeric-down"></i></button>
+              </form>
+              <form onSubmit={this.sortValueDesc} className="search-form">
                 <button className="btn-sort" type="submit"><i className="fas fa-sort-numeric-up"></i></button>
               </form>
               <form onSubmit={this.getProvider} className="search-form">
