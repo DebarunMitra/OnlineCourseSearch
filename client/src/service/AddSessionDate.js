@@ -1,19 +1,29 @@
-class SessionFilter {
+/*
+author: Debarun Mitra
+Objective: Create course search application
+file description: find the year from 'Next Session Date' field and add SessionDate field in courses
+*/
+class AddSessionDate {
+  /**
+   * [constructor]
+   * @param courses [get all courses data from App.js]
+   */
   constructor(courses) {
     this.courses = courses
   }
+  /**
+   * [getSessionDate]
+   * @return  [return courses data with 'SessionDate' field]
+   */
   getSessionDate() {
-    let yearSet = [];
+    let coursesWithSessionData = [];
     this.courses.filter(courseDate => {
       if (typeof(courseDate['Next Session Date']) === 'string' &&
-        courseDate['Next Session Date'] !== 'Self paced' &&
-        courseDate['Next Session Date'] !== undefined &&
-        courseDate['Next Session Date'] !== NaN) {
-        //console.log('catch string'); replace(/^\s+|\s+$|\s+(?=\s)/g, "")
+        courseDate['Next Session Date'] !== 'Self paced') {
         let yearStr = courseDate['Next Session Date'].split(',');
         if (yearStr[1] !== undefined) {
-          let year = yearStr[1].replace(/^\s+|\s+$|\s+(?=\s)/g, "");
-          yearSet.push({
+          let year = yearStr[1].replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // regex to replace whitespace from year string
+          coursesWithSessionData.push({
             "Course Id": courseDate['Course Id'],
             "Course Name": courseDate['Course Name'],
             "Provider": courseDate['Provider'],
@@ -27,7 +37,7 @@ class SessionFilter {
           })
         }
       } else if (typeof(courseDate['Next Session Date']) === 'number') {
-        yearSet.push({
+        coursesWithSessionData.push({
           "Course Id": courseDate['Course Id'],
           "Course Name": courseDate['Course Name'],
           "Provider": courseDate['Provider'],
@@ -41,8 +51,8 @@ class SessionFilter {
         })
       }
     });
-    return yearSet
+    return coursesWithSessionData;
   }
 }
 
-export default SessionFilter;
+export default AddSessionDate;

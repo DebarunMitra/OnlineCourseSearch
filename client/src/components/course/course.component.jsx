@@ -1,6 +1,9 @@
 import React from 'react' ;
 import './course.style.css';
 
+/*
+  Destructuring parameters from props
+ */
 export const Courses = ({ courseId,
                         courseName,
                         provider,

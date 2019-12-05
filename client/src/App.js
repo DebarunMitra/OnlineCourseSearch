@@ -4,7 +4,7 @@ import { SearchBox } from './components/search-box/search-box.component';
 import { Courses } from './components/course/course.component';
 import { ProviderFilterBox } from './components/provider-filter-box/provider-filter-box.component';
 import Spinner from './components/Spinner';
-import SessionFilter from './service/SessionFilter';
+import AddSessionDate from './service/AddSessionDate';
 
 class App extends Component {
   constructor(props){
@@ -56,7 +56,7 @@ setSearch = e => {
  */
 sortSessionAsceYear=e=>{
   e.preventDefault();
-  let courseData=new SessionFilter(this.state.courses);//SessionFilter class to add SessionDate in the courses
+  let courseData=new AddSessionDate(this.state.courses);//SessionFilter class to add SessionDate in the courses
   let sortBySession=courseData.getSessionDate();//get courses with SessionDate
   this.setState({
     courses:sortBySession.sort((current,next)=>current['SessionDate']-next['SessionDate'])
@@ -69,8 +69,8 @@ sortSessionAsceYear=e=>{
  */
 sortSessionDescYear=e=>{
   e.preventDefault();
-  let courseData=new SessionFilter(this.state.courses);
-  let sortBySession=courseData.setSessionDate();
+  let courseData=new AddSessionDate(this.state.courses);
+  let sortBySession=courseData.getSessionDate();
   this.setState({
     courses:sortBySession.sort((current,next)=>next['SessionDate']-current['SessionDate'])
   });

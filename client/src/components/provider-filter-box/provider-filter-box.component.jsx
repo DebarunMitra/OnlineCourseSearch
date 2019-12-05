@@ -1,6 +1,9 @@
 import React from 'react';
 import './provider-filter-box.style.css';
 
+/*
+  Destructuring parameters from props
+ */
 export const ProviderFilterBox = ({ search, updateProvider, placeholder }) => (
   <div>
     <input
