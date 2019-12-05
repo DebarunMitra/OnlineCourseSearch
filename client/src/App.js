@@ -26,50 +26,84 @@ componentDidMount(){
 
 updateSearch = e => {
   this.setState({
-    searchField: e.target.value
+    searchField: e.tarset.value
   });
 };
-
-getSearch = e => {
+/**
+ * [setSearch]
+ * @param e [event object from eventhandler]
+* @return   [set the final search value to finalSearch ]
+ */
+setSearch = e => {
   e.preventDefault();
   this.setState({
     finalSearch: this.state.searchField
   });
 };
+/**
+ * [sortSessionDescYear]
+ * @param  e [event object from eventhandler]
+ * @return   [sort all courses based on Next Session Date (year) in ascending order]
+ */
 sortSessionAsceYear=e=>{
   e.preventDefault();
   let courseData=new SessionFilter(this.state.courses);
-  let sortBySession=courseData.getSessionDate();
+  let sortBySession=courseData.setSessionDate();
   this.setState({
-    courses:sortBySession.sort((a,b)=>a['SessionDate']-b['SessionDate'])
+    courses:sortBySession.sort((current,next)=>current['SessionDate']-next['SessionDate'])
   });
 }
+/**
+ * [sortSessionDescYear description]
+ * @param  e [event object from eventhandler]
+ * @return   [sort all courses based on Next Session Date (year) in descending order]
+ */
 sortSessionDescYear=e=>{
   e.preventDefault();
   let courseData=new SessionFilter(this.state.courses);
-  let sortBySession=courseData.getSessionDate();
+  let sortBySession=courseData.setSessionDate();
   this.setState({
-    courses:sortBySession.sort((a,b)=>b['SessionDate']-a['SessionDate'])
+    courses:sortBySession.sort((current,next)=>next['SessionDate']-current['SessionDate'])
   });
 }
+/**
+ * [sortValueAsce]
+ * @param  e [event object from eventhandler]
+ * @return   [sort all courses based on Length in ascending order]
+ */
 sortValueAsce = e => {
   e.preventDefault();
   this.setState({
     courses: this.state.courses.sort((current, next) => current.Length - next.Length)
   });
 }
+/**
+ * [sortValueDesc]
+ * @param  e [event object from eventhandler]
+ * @return   [sort all courses based on Length in descending order]
+ */
 sortValueDesc = e => {
   e.preventDefault();
   this.setState({
     courses: this.state.courses.sort((current, next) => next.Length - current.Length)
   });
 }
+/**
+ * [updateProvider]
+ * @param  e [event object from eventhandler]
+ * @return   [set updated value to providerSearch]
+ */
 updateProvider = e => {
   this.setState({
-    providerSearch: e.target.value
+    providerSearch: e.tarset.value
   });
 }
-getProvider = e => {
+/**
+ * [setProvider]
+ * @param e [event object from eventhandler]
+ * @return   [set final value into provider from providerSearch]
+ */
+setProvider = e => {
   e.preventDefault();
   this.setState({
     provider: this.state.providerSearch
@@ -96,7 +130,7 @@ getProvider = e => {
         <header className="header">
           <h1 className="title">Online Course Search</h1>
           <div className="search-filter">
-          <form onSubmit={this.getSearch} className="search-form">
+          <form onSubmit={this.setSearch} className="search-form">
             <SearchBox updateSearch={this.updateSearch} placeholder="Search Courses"/>
           </form>
           </div>
@@ -117,7 +151,7 @@ getProvider = e => {
               <form onSubmit={this.sortValueDesc} className="search-form">
                 <button className="btn-sort" type="submit"><i className="fas fa-sort-numeric-up"></i></button>
               </form>
-              <form onSubmit={this.getProvider} className="search-form">
+              <form onSubmit={this.setProvider} className="search-form">
                 <ProviderFilterBox updateProvider={this.updateProvider} placeholder="Search Provider"/>
               </form>
             </div>
