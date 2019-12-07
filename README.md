@@ -30,7 +30,6 @@ OnlineCourseSearch
 - Step 3: After completing installation of node modules, Type next command
 **`npm start`**
 The application will run in the development mode.
-Open http://localhost:3000 to view it in the browser.
 ### ScreenShot:
 ![image1](screenShot/img1.PNG)
 
